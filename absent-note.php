@@ -34,7 +34,7 @@
 <body>
     <div class="container mt-5">
 
-        <form action="absentPDF.php" class="needs-validation offset-md-3 col-md-6" method="POST" novalidate>
+        <form action="absentNote.pdf" class="needs-validation offset-md-3 col-md-6" method="POST" novalidate>
             <h1>แบบใบลาป่วย กิจส่วนตัว และคลอดบุตร</h1>
             <p>กรุณากรอกข้อมูลในช่องให้ถูกต้องและครบถ้วน หลักจากนั้นกดปุ่มจะได้ไฟล์เอกสาร .pdf</p>
             <div class="row mb-2">

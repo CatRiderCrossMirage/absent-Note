@@ -129,6 +129,6 @@ $data = "
 
 $mpdf->writeHTML($data);
 
-$mpdf->Output('absentNote.pdf','D');
+$mpdf->Output('absentNote.pdf');
 
 ?>
