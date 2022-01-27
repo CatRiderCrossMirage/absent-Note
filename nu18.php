@@ -74,7 +74,7 @@ $data = "
 </style>
     <table>
         <tr>
-            <td style='border: none;text-align:center;'><img src='img/NULOGO.PNG' height='100'></td>
+            <td style='border: none;text-align:center;'><img src='pic/NULOGO.PNG' height='100'></td>
             <td style='border: none;text-align:center;padding-left:50px;'>
                 <b><p style='text-align:center;font-size:28px;'>
                 มหาวิทยาลัยนเรศวร<br>
@@ -82,7 +82,7 @@ $data = "
                 <p style='text-align:center;font-size:20px;'>
                 ภาคการศึกษา $semester &nbsp; ปีการศึกษา $yearDegree </p>
             </td>
-            <td style='border: none;text-align:center;'><img src='img/NU18logo.PNG' height='70'>
+            <td style='border: none;text-align:center;'><img src='pic/NU18logo.PNG' height='70'>
             <p style='text-align:right; font-size:20px;'>
             วันที่&nbsp;&nbsp;$dateWriteSplite[2]  เดือน  $monthName พ.ศ.&nbsp;&nbsp; $year <br>
             ระดับปริญญา $degree <br>
