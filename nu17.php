@@ -58,9 +58,9 @@ $mpdf = new \Mpdf\Mpdf([
     'fontdata' => $fontData + [
         'sarabun' => [
             'R' => 'THSarabunNew.ttf',
-            'I' => 'THSarabunNew-Italic.ttf',
-            'B' => 'THSarabunNew-Bold.ttf',
-            'BI' => 'THSarabunNew-BoldItalic.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
         ]
     ],
     'default_font' => 'sarabun'
@@ -81,7 +81,7 @@ $data = "
 </style>
     <table>
         <tr>
-            <td style='border: none;text-align:center;'><img src='img/NULOGO.PNG' height='90'></td>
+            <td style='border: none;text-align:center;'><img src='pic/NULOGO.PNG' height='90'></td>
             <td style='border: none;text-align:center;padding-left:50px;'>
                 <b><p style='text-align:center;font-size:28px;'>
                 มหาวิทยาลัยนเรศวร<br>
@@ -89,7 +89,7 @@ $data = "
                 <p style='text-align:center;font-size:20px;'>
                 ภาคการศึกษา $semester &nbsp; ปีการศึกษา $yearDegree  </p>
             </td>
-            <td style='border: none;text-align:center;'><img src='img/NU17logo.PNG' height='60'>
+            <td style='border: none;text-align:center;'><img src='pic/NU17logo.PNG' height='60'>
             <p style='text-align:right; font-size:20px;'>
             วันที่&nbsp;&nbsp;$dateWriteSplite[2]  เดือน  $monthName พ.ศ.&nbsp;&nbsp; $year <br>
             ระดับปริญญา $degree <br>
