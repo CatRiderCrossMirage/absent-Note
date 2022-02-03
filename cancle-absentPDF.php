@@ -1,0 +1,125 @@
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php'; 
+
+// grab variable
+$monthArr = Array(
+    "01"=>"มกราคม",
+    "02"=>"กุมภาพันธ์",
+    "03"=>"มีนาคม",
+    "04"=>"เมษายน",
+    "05"=>"พฤษภาคม",
+    "06"=>"มิถุนายน", 
+    "07"=>"กรกฎาคม",
+    "08"=>"สิงหาคม",
+    "09"=>"กันยายน",
+    "10"=>"ตุลาคม",
+    "11"=>"พฤศจิกายน",
+    "12"=>"ธันวาคม"
+); 
+
+$dateWrite = $_POST['dateWrite'];
+
+$dateWriteSplite = explode("-",$dateWrite);
+$monthName = $monthArr[$dateWriteSplite[1]];
+$year = $dateWriteSplite[0]+543;
+
+$fullname = $_POST['fullname'];
+$jobTitle = $_POST['jobTitle'];
+$belongTo = $_POST['belongTo'];
+$motive = $_POST['motive'];
+$motiveBecuase = $_POST['motiveBecuase'];
+
+$dateStartAbsent = $_POST['dateStartAbsent'];
+$dateStartAbsentSplite = explode("-",$dateStartAbsent);
+$monthStart = $monthArr[$dateStartAbsentSplite[1]];
+$yearStart = $dateStartAbsentSplite[0]+543;
+
+$dateEndAbsent = $_POST['dateEndAbsent'];
+$dateEndAbsentSplite = explode("-",$dateEndAbsent);
+$monthEnd = $monthArr[$dateEndAbsentSplite[1]];
+$yearEnd = $dateEndAbsentSplite[0]+543;
+$numDate = $_POST['numDate'];
+
+
+// creat PDF
+$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+$fontDirs = $defaultConfig['fontDir'];
+
+$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+$fontData = $defaultFontConfig['fontdata'];
+
+$mpdf = new \Mpdf\Mpdf([
+    'fontDir' => array_merge($fontDirs, [
+        __DIR__ . '/tmp',
+    ]),
+    'fontdata' => $fontData + [
+        'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
+            'BI' => 'THSarabunNew BoldItalic.ttf',
+        ]
+    ],
+    'default_font' => 'sarabun'
+]);
+
+$data = "
+    <p style='text-align:right;font-size: 22px;'><I>เขียนที่&nbsp;&nbsp;&nbsp;&nbsp;คณะสถาปัตยกรรม มหาวิทยาลัยนเรศวร<br>
+    วันที่&nbsp;&nbsp;$dateWriteSplite[2]  เดือน&nbsp;&nbsp;$monthName พ.ศ.&nbsp;&nbsp;$year</p>
+
+    <p style='font-size: 26px;'><I>
+    <b>เรื่อง</b> ขอยกเลิกการลา   <br>
+    <b>เรียน</b> คณบดีคณะสถาปัตยกรรมศาสตร์ ศิลปะและการออกแบบ<br></p>
+
+    <p style='padding-left:75px;font-size: 22px;'><I>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ข้าพเจ้า</b>&nbsp;&nbsp;&nbsp;&nbsp;$fullname &nbsp;&nbsp;&nbsp;&nbsp; 
+    <b>ตำแหน่ง</b>&nbsp;&nbsp;&nbsp;&nbsp;$jobTitle &nbsp;&nbsp;&nbsp;&nbsp; <br>
+    <b>สังกัด</b>&nbsp;&nbsp;&nbsp;&nbsp;$belongTo &nbsp;&nbsp;&nbsp;&nbsp;
+    <b>ได้รับอนุญาตให้</b>&nbsp;&nbsp;ลา$motive <br>
+    <b>ตั้งแต่วันที่</b>&nbsp;&nbsp;&nbsp;&nbsp;$dateStartAbsentSplite[2]&nbsp;&nbsp;&nbsp;&nbsp;<b>เดือน</b>&nbsp;&nbsp;&nbsp;&nbsp;$monthStart&nbsp;&nbsp;&nbsp;&nbsp;<b>พ.ศ.</b>&nbsp;&nbsp;$yearStart<b><br>
+    ถึงวันที่</b>&nbsp;&nbsp;&nbsp;&nbsp;$dateEndAbsentSplite[2]&nbsp;&nbsp;&nbsp;&nbsp;<b>เดือน</b>&nbsp;&nbsp;&nbsp;&nbsp;$monthEnd&nbsp;&nbsp;&nbsp;&nbsp;<b>พ.ศ.</b>&nbsp;&nbsp;$yearEnd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b>รวม</b>&nbsp;&nbsp;&nbsp;&nbsp;$numDate&nbsp;&nbsp;&nbsp;&nbsp;<b>วัน&nbsp;&nbsp;นั้น</b> <br><br>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เนื่องจาก</b>&nbsp;&nbsp;&nbsp;&nbsp;$motiveBecuase &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b>จึงขอยกเลิกวัน</b>&nbsp;&nbsp;&nbsp;ลา$motive <br>
+    <b>ตั้งแต่วันที่</b>&nbsp;&nbsp;&nbsp;&nbsp;$dateStartAbsentSplite[2]&nbsp;&nbsp;&nbsp;&nbsp;<b>เดือน</b>&nbsp;&nbsp;&nbsp;&nbsp;$monthStart&nbsp;&nbsp;&nbsp;&nbsp;<b>พ.ศ.</b>&nbsp;&nbsp;$yearStart<b><br>
+    ถึงวันที่</b>&nbsp;&nbsp;&nbsp;&nbsp;$dateEndAbsentSplite[2]&nbsp;&nbsp;&nbsp;&nbsp;<b>เดือน</b>&nbsp;&nbsp;&nbsp;&nbsp;$monthEnd&nbsp;&nbsp;&nbsp;&nbsp;<b>พ.ศ.</b>&nbsp;&nbsp;$yearEnd<br>
+    <br>
+
+    <p style='text-align:center;font-size: 20px;'><I>
+    <b>ขอแสดงความนับถือ</b><br>
+    ลงชื่อ______________________________<br>
+    (........$fullname........)<br></p>
+
+    
+    <div class='row'>
+        <div class='column' style='float:right;width:50%;'>
+            <div style='font-size: 18px;'><I>
+            ความเห็นผู้บังคับบัญชา <br>
+            ____________________________________________ <br>
+            ____________________________________________ <br>
+            ลงชื่อ_____________________________________ <br>
+            วันที่_______/____________/_____________ </I></div><br>
+            <div style='font-size: 18px;'><I>คำสั่ง </I></div><br>
+            <table>
+                <tr >
+                    <td><div style='width:30px;height: 30px;;border:2px solid #000;'></div></td>
+                    <td>&nbsp;[&nbsp;&nbsp;&nbsp;&nbsp;] อนุญาต &nbsp;&nbsp;&nbsp;</td>
+                    <td><div style='width:30px;height: 30px;;border:2px solid #000;'></div></td>
+                    <td>&nbsp; [&nbsp;&nbsp;&nbsp;&nbsp;] ไม่อนุญาต</div> </td>
+                </tr>
+            </table><div style='font-size: 18px;'><I>
+            ____________________________________________ <br>
+            ____________________________________________ <br>
+            วันที่_______/____________/_____________ </I></div>
+
+        </div>
+    </div>
+";
+
+
+$mpdf->writeHTML($data);
+
+$mpdf->Output();
+
+?>
